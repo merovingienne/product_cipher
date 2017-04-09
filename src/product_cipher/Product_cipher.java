@@ -17,13 +17,17 @@ import javafx.stage.Stage;
  */
 public class Product_cipher extends Application {
     
+    private static Stage stage;
+    
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/product_cipher/fxml/FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("Product Cipher");
+        this.stage = stage;
         stage.show();
     }
 
@@ -32,6 +36,10 @@ public class Product_cipher extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public static Stage getStage(){
+        return stage;
     }
     
 }
