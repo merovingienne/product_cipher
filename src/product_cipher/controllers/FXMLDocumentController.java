@@ -6,14 +6,17 @@
 package product_cipher.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTextArea;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.stage.FileChooser;
-import product_cipher.Product_cipher;
+import javafx.scene.control.Label;
+import javafx.scene.text.TextFlow;
+import product_cipher.util.fileIO;
+import product_cipher.logic.encrypt;
 
 /**
  *
@@ -22,30 +25,65 @@ import product_cipher.Product_cipher;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private JFXTextField tf1;
+    private JFXTextArea input_text;
 
     @FXML
-    private JFXButton printButton;
+    private JFXTextArea encrypted_text;
+    
+    @FXML
+    private JFXTextArea decrypted_text;
+
+    @FXML
+    private JFXButton encryptButton;
     
     @FXML
     private JFXButton fileSelectButton;
+    
+    @FXML
+    private JFXButton clearButton;
+    
+    @FXML
+    private JFXButton decryptButton;
 
     @FXML
-    void openFileChooser(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        
-        fileChooser.showOpenDialog(Product_cipher.getStage());
-//        fileChooser.showOpenDialog(null);
+    void decryptText(ActionEvent event) {
+        decrypted_text.setText(encrypt.decryptMsg(encrypted_text.getText()));
     }
 
     @FXML
-    void printText(ActionEvent event) {
-        System.out.println(tf1.getText());
+    void openFileChooser(ActionEvent event) {
+        
+        String x = fileIO.openFile();
+        
+//        System.out.println(x);
+        
+        input_text.setText(x);
+        
+//        fileChooser.showOpenDialog(null);
+    }
+    
+
+    @FXML
+    void encryptText(ActionEvent event) {
+        encrypted_text.setText(encrypt.encryptMsg(input_text.getText()));
+        decryptButton.setDisable(false);
+        clearButton.setDisable(false);
+    }
+    
+    @FXML
+    void clearAll(ActionEvent event){
+        input_text.clear();
+        encrypted_text.clear();
+        decrypted_text.clear();
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+//        encryptButton.setDisable(true);
+        decryptButton.setDisable(true);
+        clearButton.setDisable(true);
+        
     }    
     
 }
