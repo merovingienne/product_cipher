@@ -32,11 +32,11 @@
             <DropShadow />
          </effect>
          <children>
-            <Label layoutX="30.0" layoutY="14.0" text="Encryption settings" />
+            <Label layoutX="30.0" layoutY="14.0" text="Settings" />
             <Label layoutX="30.0" layoutY="51.0" text="Transposition rounds:" />
             <Label layoutX="30.0" layoutY="89.0" text="Transposition rows:" />
             <JFXTextField fx:id="tpRounds" alignment="CENTER" layoutX="196.0" layoutY="43.0" onKeyReleased="#tpRoundsChanged" prefHeight="29.0" prefWidth="27.0" text="1" />
-            <JFXTextField fx:id="numRows" alignment="CENTER" layoutX="196.0" layoutY="81.0" prefHeight="29.0" prefWidth="27.0" text="3" />
+            <JFXTextField fx:id="numRows" alignment="CENTER" layoutX="196.0" layoutY="81.0" onKeyReleased="#tpRoundsChanged" prefHeight="29.0" prefWidth="27.0" text="3" />
          </children>
       </Pane>
       <Pane layoutX="709.0" layoutY="167.0" prefHeight="496.0" prefWidth="391.0" style="-fx-background-color: #f3f3f3;">
@@ -44,7 +44,7 @@
             <DropShadow />
          </effect>
          <children>
-            <Label alignment="TOP_LEFT" layoutX="33.0" layoutY="27.0" prefHeight="453.0" prefWidth="320.0" text="Description&#10;&#10;This pogram takes in a text and runs it through a substitution and transposition process.&#10;&#10;The transposition is columnar. It divides the substituted text into the given number of rows. This is done as many times as the transposition rounds specified.&#10;&#10;You can specify the number of transposition rounds and the number of rows to obtain different strengths." wrapText="true" />
+            <Label alignment="TOP_LEFT" layoutX="33.0" layoutY="27.0" prefHeight="453.0" prefWidth="320.0" text="Encryption&#10;&#10;This pogram takes in a text and runs it through a substitution and transposition process.&#10;&#10;The transposition is columnar. It divides the substituted text into the given number of rows. This is done as many times as the transposition rounds specified.&#10;&#10;You can specify the number of transposition rounds and the number of rows to obtain different strengths.&#10;&#10;Decryption&#10;&#10;You can open a ciphered file and decrypt it, given that you know the correct transposition rounds and rows." wrapText="true" />
          </children>
       </Pane>
    </children>

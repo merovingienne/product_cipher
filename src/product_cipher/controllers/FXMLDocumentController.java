@@ -83,7 +83,6 @@ public class FXMLDocumentController implements Initializable {
 
         if (input_text.getText().length() != 0) {
             decryptButton.setDisable(false);
-            clearButton.setDisable(false);
 
             encrypted_text.setText(
                     encrypt.encryptMsg(
@@ -100,7 +99,6 @@ public class FXMLDocumentController implements Initializable {
         decrypted_text.clear();
 
         decryptButton.setDisable(true);
-        clearButton.setDisable(true);
         encryptButton.setDisable(true);
     }
     
@@ -113,10 +111,12 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     void tpRoundsChanged(javafx.scene.input.KeyEvent event) {
-        if (tpRounds.getText().length() == 0) {
+        if (tpRounds.getText().length() == 0 || numRows.getText().length() == 0) {
             encryptButton.setDisable(true);
+            decryptButton.setDisable(true);
         }else{
             encryptButton.setDisable(false);
+            decryptButton.setDisable(false);
         }
     }
 
@@ -140,10 +140,13 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     void openCipheredFile(ActionEvent event) {
-        if (encrypted_text.getText().length() == 0) {
-            boolean saved = fileIO.writeFile(
-                    fileIO.saveFile(),
-                    encrypted_text.getText());
+        String x = fileIO.readCipherFile(fileIO.openFile());
+
+//        System.out.println(x);
+        if (x != null) {
+            encrypted_text.setText(x);
+            encryptButton.setDisable(true);
+            decryptButton.setDisable(false);
         }
     }
 
@@ -152,7 +155,6 @@ public class FXMLDocumentController implements Initializable {
         // TODO
 //        encryptButton.setDisable(true);
         decryptButton.setDisable(true);
-        clearButton.setDisable(true);
         encryptButton.setDisable(true);
 
     }
