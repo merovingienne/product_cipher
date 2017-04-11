@@ -3,18 +3,11 @@ package product_cipher.logic;
 /**
  * @author Chanuka Wijayakoon
  */
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.Base64;
+
 
 public class encrypt {
-    private static String key = "secret";
     
-//    private Random
-    
+//    Encryption method
     public static String encryptMsg(String msg, int numRows, int tpRounds){
         String cipherText;
         
@@ -27,6 +20,8 @@ public class encrypt {
         return cipherText;
     }
     
+    
+//    Decryption method
     public static String decryptMsg(String cipher, int numRows, int tpRounds){
         String decryptedText = "";
         
@@ -39,6 +34,7 @@ public class encrypt {
         return decryptedText;
     }
     
+//    Substitution process
     public static String substitute(String s){
         String cipher = "";
         for (char x: s.toCharArray()){
@@ -47,12 +43,14 @@ public class encrypt {
         return cipher;
     }
     
-    public static String transpose(String s, int k){
+    
+//    Transposition process
+    public static String transpose(String s, int numRows){
         int padding = 0;
         String transpositionInput = s;
         
-        if (s.length()%k !=0){
-            padding = k- (s.length()%k);
+        if (s.length()%numRows !=0){
+            padding = numRows- (s.length()%numRows);
             
             for (int j = 0; j < padding; j++) {
                 transpositionInput += "/";
@@ -61,15 +59,16 @@ public class encrypt {
               
         
         StringBuilder transpositionOutput = new StringBuilder();
-        for (int i = 0; i < k; i++) {
-            for (int j = 0; j < transpositionInput.length() / k; j++) {
-                char c = transpositionInput.charAt(i + (j * k));
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < transpositionInput.length() / numRows; j++) {
+                char c = transpositionInput.charAt(i + (j * numRows));
                 transpositionOutput.append(c);
             }
         }
         return new String(transpositionOutput);
     }
     
+//    Reverse substitution
     public static String reSubstitute(String s){
         String decipher = "";
         for (char x: s.toCharArray()){
@@ -78,6 +77,7 @@ public class encrypt {
         return decipher;
     }
 
+//    Reverse transposition
     public static String retranspose(String s, int k){
         k = s.length() / k;
         StringBuilder retransposed = new StringBuilder();

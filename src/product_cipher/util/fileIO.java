@@ -1,18 +1,18 @@
 package product_cipher.util;
 
-import java.io.BufferedWriter;
+/**
+ *
+ * @author Chanuka Wijayakoon
+ */
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 import javafx.stage.FileChooser;
 import product_cipher.Product_cipher;
 
@@ -24,6 +24,7 @@ public class fileIO {
         fileChooser.setTitle("Open text file");
 
         fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text or XML", "*.txt", "*.xml"),
                 new FileChooser.ExtensionFilter("Text", "*.txt"),
                 new FileChooser.ExtensionFilter("XML", "*.xml")
         );
@@ -74,11 +75,11 @@ public class fileIO {
                         new FileOutputStream(file),
                         Charset.forName("UTF-16").newEncoder()
                 );
-                
+
                 char_output.append(cipherText);
-                
+
                 char_output.close();
-                
+
                 return true;
             } catch (IOException ex) {
                 Logger.getLogger(fileIO.class.getName()).log(Level.SEVERE, null, ex);

@@ -1,30 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package product_cipher.controllers;
-
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
-import java.awt.event.KeyEvent;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.text.TextFlow;
-import product_cipher.util.fileIO;
-import product_cipher.logic.encrypt;
 
 /**
  *
  * @author Chanuka Wijayakoon
  */
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import product_cipher.util.fileIO;
+import product_cipher.logic.encrypt;
+
 public class FXMLDocumentController implements Initializable {
 
+//    UI Elements
     @FXML
     private JFXTextArea input_text;
 
@@ -42,7 +35,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private JFXButton clearButton;
-    
+
     @FXML
     private JFXButton clearInputButton;
 
@@ -55,6 +48,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private JFXTextField numRows;
 
+//    Event listeners
     @FXML
     void decryptText(ActionEvent event) {
         decrypted_text.setText(
@@ -69,13 +63,10 @@ public class FXMLDocumentController implements Initializable {
 
         String x = fileIO.readFile(fileIO.openFile());
 
-//        System.out.println(x);
         if (x != null) {
             input_text.setText(x);
             encryptButton.setDisable(false);
         }
-
-//        fileChooser.showOpenDialog(null);
     }
 
     @FXML
@@ -101,11 +92,11 @@ public class FXMLDocumentController implements Initializable {
         decryptButton.setDisable(true);
         encryptButton.setDisable(true);
     }
-    
+
     @FXML
     void clearInput(ActionEvent event) {
         input_text.clear();
-        
+
         encryptButton.setDisable(true);
     }
 
@@ -114,7 +105,7 @@ public class FXMLDocumentController implements Initializable {
         if (tpRounds.getText().length() == 0 || numRows.getText().length() == 0) {
             encryptButton.setDisable(true);
             decryptButton.setDisable(true);
-        }else{
+        } else {
             encryptButton.setDisable(false);
             decryptButton.setDisable(false);
         }
@@ -128,7 +119,7 @@ public class FXMLDocumentController implements Initializable {
             encryptButton.setDisable(false);
         }
     }
-    
+
     @FXML
     void saveCipherText(ActionEvent event) {
         if (encrypted_text.getText().length() != 0) {
@@ -137,12 +128,11 @@ public class FXMLDocumentController implements Initializable {
                     encrypted_text.getText());
         }
     }
-    
+
     @FXML
     void openCipheredFile(ActionEvent event) {
         String x = fileIO.readCipherFile(fileIO.openFile());
 
-//        System.out.println(x);
         if (x != null) {
             encrypted_text.setText(x);
             encryptButton.setDisable(true);
@@ -152,8 +142,7 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-//        encryptButton.setDisable(true);
+
         decryptButton.setDisable(true);
         encryptButton.setDisable(true);
 
